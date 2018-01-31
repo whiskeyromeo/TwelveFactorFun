@@ -158,6 +158,17 @@ Checkout index.js on the factor3 branch for the working code.
 
 ## Factor 4 : 
 
+The use of a proxy allows us to maximize the use of resources across geographies through the use of CDNs and the like. Here we have a very basic example in which we utilize proxies in order to maximize the availability of resources.
+
+```
+    yarn add express express-http-proxy
+    mkdir public public/images
+    wget "http://i.imgur.com/XvOd6Ym.jpg" -O public/images/piratecat.jpg 
+    echo "BASE_IMAGE_URL=http://i.imgur.com/XvOd6Ym.jpg" >> .env
+```
+Here we go for the cdn if available, otherwise we default to the instance local to the server.
+Check out index.js under the Factor4 comment or the factor4 branch for the working code
+
 
 
 
