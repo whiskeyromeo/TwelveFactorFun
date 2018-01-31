@@ -5,43 +5,61 @@
 A simple application using docker and Node to demonstrate the theory of an application built using the twelve factor design methodology
 
 
-## Factor 1 --> Proper Version Control using git
+## Factor 1 : Proper Version Control using git
 
-In order to maximize the utility of git for versioning control we should consider a few points about how to best utilize git for iterative releases
+In order to maximize the utility of git for versioning control we should consider a few points about how to best utilize git for iterative releases. The premise of this is based on the use of 
+two primary branches coming from the master, one used for our standard iterative development upates and the second used for hot-fixes and emergency changes to the production code. 
 
-Consider the creation of a branch specifically for development
+This approach greatly helps in simplifying the development process as we work with larger teams
+and our codebases grow in size and complexity. 
+### Development
+
+We begin by checking out our new development branch
+
 ```
-git checkout develop 
+git checkout -b develop 
 ```
 
-And from this branch adding specific features which will be then merged back into the development branch.
+And from this branch we add specific features which will be then merged back into the development branch when we are ready.
 
 ``` 
 git checkout -b feature/foo develop
 echo "console.log('foo');" > foo.js
 git commit -m "new foo"
 
+...
+
 git checkout -b feature/bar develop
 echo "console.log('bar');" > bar.js
 git commit -m "new bar"
 
-git checkout develop
-
-# Here is where you would normally do your pull request for code review
-# for brevity we will simply merge back into the develop branch
-git merge feature/bar
-git merge feature/foo
-
-git checkout develop
-git push
-
-# We may need to review the logs in each branch in order to ensure
-# the merges have taken place as expected. We will go ahead and rebase in 
-# order to ensure our branches are at the same working point
-git rebase develop
 ```
 
-### Preparing for release updates
+ Here is where you would normally do your pull request for code review
+ for brevity we will simply merge back into the develop branch
+
+```
+git checkout develop
+git merge feature/bar
+git push
+git log
+
+...
+
+git checkout develop
+git merge feature/foo
+git push
+git log 
+```
+
+We may need to review the logs in each branch in order to ensure
+the merges have taken place as expected. We will go ahead and rebase in 
+order to ensure our branches are at the same working point
+
+```
+git rebase develop
+```
+### Release Updates/Hot-fixes
 From the development branch we can prepare for release updates as follows
 
 ```
