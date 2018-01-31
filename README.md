@@ -122,8 +122,41 @@ After completing all merges we should go back and clean up our working tree by r
     git branch
 ```
 
+## Factor 2 : Nailing down package versions
 
+If you are anything like me, then you have probably run into an issue where you have an old project you want 
+to get up and running only to be stymied by a long list of ERR messages when you attempt to execute your dev server. 
+Using exact versioning can help you save yourself or your coworkers some future headaches. 
+Depending on which package manager you are using there are multiple ways to do this. If your are into yarn, 
+you can specify library versions via 
 
+```
+    yarn add react@^15.0
+    # or if your like me and have started to run into naming issues between hadoop and js versions of yarn :-|
+    yarnpkg add react@^15.0
+```
+
+For npm we use 
+
+```
+    npm install react@^15.0 --save
+```
+
+## Factor 3 : 
+
+Configuring variables into a separate file is a great way to increase the portability of your application as it 
+gives you a single location which you can find the most relevant variables/strings/error messages in your application
+and quickly swap them out. This improves the overall structuring of our applications as it allows us to rely more on the 
+use of portable variables than hardcoded strings. 
+
+The npm package dotenv is a great way for managing variables which may need to be imported into your node application. 
+```
+    yarnpkg add dotenv
+    echo "MONGO_URI=mongodb://localhost:27017/foo" > .env
+```
+Checkout index.js on the factor3 branch for the working code.
+
+## Factor 4 : 
 
 
 
